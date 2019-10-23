@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idao.ChapterDao">
+	<select id="Total">
+		select count(c.chid) total
+		from chapter c,product p,users u
+		where c.pid=p.pid and p.uid=u.uid
+	</select>
+	
+	<select id="check" resultType="java.util.Map">
+		<!-- select chid,chname,pname,uname,chcheck,chdate
+		from ( -->
+		select chid,chname,pname,uname,
+		case chcheck
+		when 0 then '未审核'
+		when 1 then '审核通过'
+		when 2 then '审核未通过'
+		end chcheck,chdate
+		from chapter c,product p,users u
+		where c.pid=p.pid and p.uid=u.uid
+		<!-- )
+		aaa limit #{index},#{rows}; -->
+	</select>
+	
+	<update id="yupd">
+		update chapter set chcheck=1 where chid=#{chid}
+	</update>
+	
+	<update id="wupd">
+		update chapter set chcheck=2 where chid=#{chid}
+	</update>
+</mapper>

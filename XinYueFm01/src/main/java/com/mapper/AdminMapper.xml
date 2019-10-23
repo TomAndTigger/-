@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idao.AdminDao">
+	<select id="login" resultType="AdminVO" parameterType="AdminVO">
+		select * from admin where ano=#{ano} and apwd=#{apwd}
+	</select>
+	
+	<insert id="ins" parameterType="AdminVO">
+		insert into admin(ano,apwd,aname,adate) values(#{ano},#{apwd},#{aname},NOW())
+	</insert>
+	
+	<select id="sel" resultType="AdminVO">
+		select ano,aname,adate from admin
+	</select>
+</mapper>
